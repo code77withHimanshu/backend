@@ -312,6 +312,16 @@ app.get('/tasks', authenticateJWT, async (req, res) => {
   }
 });
 
+app.get('/alltasks', async (req, res) => {
+  try {
+    const tasks = await Task.find({ userId: '66d015df355f62efbc61b2a7' });
+    console.log("Tasks:", tasks);
+    res.json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching tasks', error });
+  }
+});
+
 app.get('/tasks/:id', authenticateJWT, async (req, res) => {
   try {
     const taskId = req.params.id;
